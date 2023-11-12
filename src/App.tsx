@@ -70,7 +70,7 @@ const covidTable = memo(function App() {
     const [pageSizeSubtitle, setPageSizeSubtitle] = useState(SET_PAGE_SIZE_SUBTITLE)
 
 
-    const GeneralInfoByEvenCountry: GeneralInfoByEvenCountryType[] = useMemo(
+    const GeneralInfoByEvenCountry = useMemo(
         () => dataCounter(data, startDate, endDate),
         [data, startDate, endDate])
 

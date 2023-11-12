@@ -1,6 +1,5 @@
-import {covid19Data, GeneralInfoByEvenCountryType, periodStatic, populationDataType} from "../types";
+import {covid19Data, GeneralInfoByEvenCountryType, periodStatic} from "../types";
 import {getCountryName} from "../Utils/Getters";
-import {GRAPHIC, TABLE} from "../Utils/Constants";
 
 export const dataCounter = (data: covid19Data[], startDate: Date, endDate: Date) => {
     const GeneralInfoByEvenCountry: GeneralInfoByEvenCountryType[] = []
