@@ -57,6 +57,7 @@ export type ChooseDateProps = {
 export type FilterByCountryProps = {
     country: string
     setCountry: Dispatch<SetStateAction<string>>
+    setCurrentPage: Dispatch<SetStateAction<number>>
 }
 
 export type FilterByFieldProps = {
@@ -73,6 +74,7 @@ export type FilterByQuantityProps = {
     setLocalValueFrom: Dispatch<SetStateAction<any>>
     setLocalValueTo: Dispatch<SetStateAction<any>>
     localValueTo: any
+    setCurrentPage: Dispatch<SetStateAction<number>>
 }
 
 export type GraphicProps = {

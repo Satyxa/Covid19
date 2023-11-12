@@ -25,7 +25,7 @@ import {Graphic} from "./Components/Graphic";
 import {getFilteredByQuantity} from './BusinessLogicLayer/Filters'
 import {PageSize} from "./Components/PageSize";
 import {getFilteredDataByCountry} from "./Utils/Getters";
-
+import noData from '../src/assets/no_data.svg'
 
 const covidTable = memo(function App() {
     const [countriesPopulationData, setCountriesPopulationData] = useState([])
@@ -92,7 +92,6 @@ const covidTable = memo(function App() {
 
     useMemo(() => filterTable(tableFilter, dataWithPopulation),
         [tableFilter, dataWithPopulation])
-
     return <div>
         <div className="content">
             <ChooseDate setStartDate={setStartDate}
@@ -101,9 +100,11 @@ const covidTable = memo(function App() {
                         endDate={endDate}/>
             <div className='table_and_graphic'>
                 <button className={dataFormat === TABLE ? 'table-button buttonHover' : 'table-button'}
-                        onClick={() => setDataFormat(TABLE)}>Таблица</button>
+                        onClick={() => setDataFormat(TABLE)}>Таблица
+                </button>
                 <button className={dataFormat === GRAPHIC ? 'graphic-button buttonHover' : 'graphic-button'}
-                        onClick={() => setDataFormat(GRAPHIC)}>График</button>
+                        onClick={() => setDataFormat(GRAPHIC)}>График
+                </button>
             </div>
             <div className='table'>
                 {dataFormat === TABLE ? <div>
@@ -112,7 +113,8 @@ const covidTable = memo(function App() {
 
                                 <FilterByCountry
                                     country={country}
-                                    setCountry={setCountry}/>
+                                    setCountry={setCountry}
+                                    setCurrentPage={setCurrentPage}/>
 
                                 <FilterByField
                                     setSortBy={setSortBy}
@@ -131,7 +133,8 @@ const covidTable = memo(function App() {
                                     localValueFrom={localValueFrom}
                                     localValueTo={localValueTo}
                                     setLocalValueFrom={setLocalValueFrom}
-                                    setLocalValueTo={setLocalValueTo}/>
+                                    setLocalValueTo={setLocalValueTo}
+                                    setCurrentPage={setCurrentPage}/>
                             </div>
                             <ResetButton
                                 setValueFrom={setValueFrom}
@@ -156,7 +159,14 @@ const covidTable = memo(function App() {
                                                 currentPage={currentPage}/>
                                 </div>
                             </div>
-                            : <div>Ничего нет</div>}
+                            : <div>
+                                <div className="no__data">
+                                    <div className="no__data__container">
+                                        <p className='no__data__text'>Ничего не найдено</p>
+                                        <img src={noData} alt=""/>
+                                    </div>
+                                </div>
+                            </div>}
                     </div>
                     :
                     <Graphic GeneralInfoByEvenCountry={GeneralInfoByEvenCountry}

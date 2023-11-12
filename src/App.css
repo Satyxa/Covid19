@@ -179,8 +179,6 @@ button {
   font: inherit;
   color: inherit;
   background-color: transparent;
-  /* отображаем курсор в виде руки при наведении; некоторые
-  считают, что необходимо оставлять стрелочный вид для кнопок */
   cursor: pointer;
 }
 
@@ -331,4 +329,18 @@ select {
 }
 .none {
   display: none;
+}
+
+.no__data {
+  display: flex;
+  justify-content: center;
+}
+.no__data__container {
+  text-align: center;
+}
+
+.no__data__text {
+  font-weight: 500;
+  padding: 10px;
+  border-bottom: 2px solid darkred;
 }

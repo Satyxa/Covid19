@@ -3,7 +3,7 @@ import '../App.css'
 import {FilterByQuantityProps} from "../types";
 
 export const FilterByQuantity = React.memo(({valueFrom, valueTo, setValueFrom, setValueTo,
-                                                localValueFrom, localValueTo, setLocalValueTo, setLocalValueFrom}: FilterByQuantityProps) => {
+                                                localValueFrom, localValueTo, setLocalValueTo, setLocalValueFrom, setCurrentPage}: FilterByQuantityProps) => {
 
     return <div>
         <input
@@ -14,7 +14,10 @@ export const FilterByQuantity = React.memo(({valueFrom, valueTo, setValueFrom, s
             onChange={(e) => {
                 const value = e.currentTarget.value
                 setLocalValueFrom(value)
-                if(!isNaN(Number(value))) setValueFrom(Number(value))
+                if(!isNaN(Number(value))) {
+                    setValueFrom(Number(value))
+                    setCurrentPage(1)
+                }
             }}/>
 
         <input
@@ -25,7 +28,10 @@ export const FilterByQuantity = React.memo(({valueFrom, valueTo, setValueFrom, s
             onChange={(e) => {
                 const value = e.currentTarget.value
                 setLocalValueTo(value)
-                if(!isNaN(Number(value))) setValueTo(Number(value))
+                if(!isNaN(Number(value))) {
+                    setValueTo(Number(value))
+                    setCurrentPage(1)
+                }
             }}/>
     </div>
 })
