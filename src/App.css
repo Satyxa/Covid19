@@ -1,38 +1,326 @@
-.App {
+html {
+  background-color: white;
+}
+body {
+  padding: 20px;
+  font-family: 'Lato', 'Roboto', 'Arial', sans-serif;
+  letter-spacing: 0.03rem;
+}
+.table {
+  border-collapse: collapse;
+  padding: 10px;
+  width: auto;
+  background-color: #ffffff;
+  border: 1px solid lightgray;
+  border-radius: 3px;
+  border-top-left-radius: 0;
+  height: auto;
+  padding-bottom: 30px;
+}
+.table_and_graphic {
+
+  display: flex;
+  width: 100%;
+}
+
+.table-button, .graphic-button {
+  padding: 4px 12px;
+  border-top-left-radius: 3px;
+  border-top-right-radius: 3px;
+  background-color: #ffffff;
+  border: 1px solid #003333;
+  border-bottom: none;
+
+  color: #003333;
+}
+.graphic-button {
+  border-left: none;
+}
+.table-button {
+  border-right: none;
+
+}
+
+.buttonHover {
+
+  border: 1px solid #3366FF;
+  border-bottom: none;
+  color: #3366FF;
+}
+
+.table-body {
+  width: 100%;
+  margin: 30px 0;
+}
+.td_blue_color {
+  background-color: #f8f8f7;
+  color: Crimson;
+  font-weight: bold;
+}
+.td_light-blue {
+  background-color: #ffffff;
+  color: black;
+  font-weight: bold;
+}
+.graphic__wrapper {
+  width: 90%;
+}
+.pagination-box {
+ padding-bottom: 20px;
+}
+.filter__container {
+  margin-top: 30px;
+  display: flex;
+  width: 90%;
+  justify-content: space-between;
+}
+.graphic__filter {
+  width: 30%;
+  padding: 5px;
+  outline: none;
+}
+.countries__container {
+  width: 30%;
+}
+.countries__container-title {
+  padding: 0;
+  margin: 0 0 5px 0;
+  font-weight: 500;
+}
+.countries__container-subtitle {
+  padding: 0;
+  font-weight: 300;
+}
+.reset__graphicCountries__container {
+  margin: 0;
+  padding: 0;
+}
+.reset__graphicCountries {
+  padding: 8px;
+  border: 1px solid #FF6666;
+  color: #FF6666;
+}
+.reset__graphicCountries:hover {
+  border: 1px solid #6600CC;
+  color: #6600CC;
+}
+input {
+  border: 1px solid lightgray;
+  border-radius: 3px;
+}
+select {
+  border: 1px solid lightgray;
+  border-radius: 3px;
+}
+.select__field {
+  width: 100%;
+}
+option {
+  border: 1px solid lightgray;
+  border-radius: 3px;
+
+}
+th {
+  cursor: pointer;
+  background-color: #ffffff;
+  width: 2%;
+  height: 50px;
+  border: 1px solid #366;
+  padding: 8px 12px;
+  font-size: 13px;
+}
+th:hover {
+  color: #8214db;
+}
+.th__active {
+  color: #8214db;
+  font-weight: bold;
+}
+td {
+  word-wrap: break-word;
+  width: 2%;
+  height: 30px;
   text-align: center;
+  padding: 20px 10px;
+  border: 1px solid #366;
 }
-
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+.sort {
+  display: flex;
+  width: 100%;
+  height:25px;
+  justify-content: space-between;
+  margin-top: 40px;
 }
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+.options {
   display: flex;
   flex-direction: column;
-  align-items: center;
+}
+
+button {
+  padding: 0;
+  border: none;
+  font: inherit;
+  color: inherit;
+  background-color: transparent;
+  /* отображаем курсор в виде руки при наведении; некоторые
+  считают, что необходимо оставлять стрелочный вид для кнопок */
+  cursor: pointer;
+}
+
+.search_country {
+  display: flex;
+}
+.input_search {
+  padding: 5px;
+  outline: none;
+  width: 110px;
+}
+
+.valueFrom, .valueTo {
+  padding: 7px 6px;
+  width: 85px;
+  text-align: center;
+  outline: none;
+}
+.valueFrom {
+  border-right: none;
+}
+.reset {
+
+  width: 100%;
+  display: block;
+  margin: 20px 0;
+}
+.reset_filters {
+  border: 1px solid #FF6666;
+  color: #FF6666;
+  border-radius: 3px;
+  float: right;
+  width: 170px;
+  height: 45px;
+  text-align: center;
+  background-color: #ffffff;
+}
+.reset_filters:hover {
+  border: 1px solid #6600CC;
+  color: #6600CC;
+}
+
+select {
+
+  outline: none;
+  width: 170px;
+  height: 30px;
+}
+
+.pagination {
+
+}
+
+.pagination__wrapper {
+  width: 210px;
+  height: 30px;
+  display: flex;
+  align-items:  center;
+  float: right;
+  margin-top: 30px;
+  justify-content: space-around;
+}
+.pagination__button-even {
+  border: 1px solid #FF6666;
+  border-radius: 111px;
+  color: #FF6666;
+}
+.pagination__button-odd {
+  border: 1px solid #6600CC;
+  border-radius: 111px;
+  color: #6600CC;
+}
+.pagination__button {
+  padding: 5px 10px;
+  font-weight: bold;
+  background-color: #ffffff;
+  margin-left: 5px;
+}
+.pagination__button-arrows {
+  padding: 5px 8px;
+  border: 1px solid lightgray;
+  border-radius: 3px;
+  background-color: #ffffff;
+  color: #003333;
+  font-weight: bold;
+  margin-left: 5px;
+}
+.pagination__dod {
+  background-color: #fff;
+  border: 1px solid black;
+  padding: 5px 10px;
+  text-align: center;
+}
+.pagination__buttons-wrapper {
+  display: flex;
+}
+.change__pageSize {
+  width: 30px;
+  height: 20px;
+  padding: 4px 2px;
+  text-align: center;
+  outline: none;
+}
+
+.change__pageSize-wrapper {
+  display: flex;
   justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+  width: 30px;
+  position: relative;
+  text-align: center;
+}
+.change__pageSize-subtitle {
+  font-size: 10px;
+  position: absolute;
+  top: -30px;
+  color: lightgray;
+  width: 280px;
+}
+.error-color {
+  color: rgb(204,0,0);
+}
+.error-border {
+  border: 1px solid rgb(204,0,0);
+}
+.date__box {
+  margin-bottom: 20px;
 }
 
-.App-link {
-  color: #61dafb;
+.date__wrapper {
+  display: flex;
+}
+.choose__period {
+  width: 80px;
+  padding: 5px;
+  margin-right: 10px;
+  outline: none;
+}
+.reset-to-default-date {
+  border: 1px solid #FF6666;
+  color: #FF6666;
+  text-align: center;
+  padding: 5px;
+  border-radius: 3px;
+}
+.reset-to-default-date:hover {
+  border: 1px solid #6600CC;
+  color: #6600CC;
+}
+.none {
+  display: none;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.table-element-even {
+  color: #c90 ;
+  font-weight: bold;
+}
+.table-element-odd {
+  color: #dbd514;
+  font-weight: bold;
 }

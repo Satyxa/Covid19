@@ -40,7 +40,7 @@ export const drawGraphic = (periods: periodStatic[]) => {
         },
     };
     const filteredPeriods = periods.filter(el => el.cases !== 0 || el.deaths !== 0)
-
+filteredPeriods.reverse()
     filteredPeriods.unshift({
         cases: 0,
         deaths: 0,
@@ -53,21 +53,20 @@ export const drawGraphic = (periods: periodStatic[]) => {
         datasets: [
             {
                 fill: true,
-                label: 'Dataset 1',
+                label: 'Случаи',
                 data: filteredPeriods.map((data) => data.cases),
                 borderColor: 'rgb(53, 162, 235)',
                 backgroundColor: 'rgba(53, 162, 235, 0.5)',
             },
             {
                 fill: true,
-                label: 'Dataset 2',
+                label: 'Смерти',
                 data: filteredPeriods.map((data) => data.deaths),
                 borderColor: 'rgb(238,224,79)',
                 backgroundColor: 'rgb(245,237,153)',
             },
         ],
     }
-    console.log(data)
 
     return {options, data}
 }
@@ -75,7 +74,6 @@ interface AreaChartProps {
     periods: periodStatic[]
 }
 export const AreaChart: FC<AreaChartProps> = ({periods}:AreaChartProps) => {
-    const {options, data} = drawGraphic(periods)
-
+    const {options, data} = drawGraphic(periods.reverse())
     return (<Line options={options} data={data} />)
 }

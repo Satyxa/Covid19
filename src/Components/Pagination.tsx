@@ -1,34 +1,19 @@
-import {Dispatch, SetStateAction, useState} from "react";
-import {GeneralInfoByEvenCountryType} from "./types";
+import {PaginationProps} from "../types";
 import * as React from "react";
 import '../App.css'
-type props = {
-    GeneralInfoByEvenCountry: GeneralInfoByEvenCountryType[]
-    setCurrentPage: Dispatch<SetStateAction<number>>
-    pageSize: number
-}
+import { PaginationButtons } from "./PaginationButtons";
+import {ARROW_LEFT, ARROW_RIGHT} from "../Utils/Constants";
 
-export const Pagination = ({GeneralInfoByEvenCountry, setCurrentPage, pageSize}: props) => {
-    const arrowLeft = '<<'
-    const arrowRight = '>>'
-    const totalCount = GeneralInfoByEvenCountry.length
+export const Pagination = React.memo(({dataWithPopulation, setCurrentPage, pageSize, currentPage}: PaginationProps) => {
+    const totalCount = dataWithPopulation.length
     const pages = Math.ceil(totalCount / pageSize)
-
     return <div>
         <div className="pagination">
             <div className="pagination__wrapper">
-                <button className="pagination__button-arrows" onClick={() => {
-                    setCurrentPage(1)}
-                } value='1'> {arrowLeft}  </button>
-                <button className="pagination__button" value='1'>1</button>
-                <button className="pagination__button" value='2'>2</button>
-                <button className="pagination__button" value='3'>3</button>
-                <button className="pagination__button" value='4'>4</button>
-                <p className="pagination__dod">...</p>
-                <button className="pagination__button-arrows" onClick={() => {
-                    setCurrentPage(pages)}
-                } value='6'>{arrowRight}</button>
+                <button className={pages > 3 ? "pagination__button-arrows" : "none"} onClick={() => setCurrentPage(1)}>{ARROW_LEFT}</button>
+                <PaginationButtons pageSize={pageSize} currentPage={currentPage} setCurrentPage={setCurrentPage} dataWithPopulation={dataWithPopulation} />
+                <button className={pages > 3 ? "pagination__button-arrows" : "none"} onClick={() => setCurrentPage(pages)}>{ARROW_RIGHT}</button>
             </div>
         </div>
     </div>
-}
+})
