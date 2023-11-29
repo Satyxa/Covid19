@@ -39,8 +39,8 @@ export const drawGraphic = (periods: monthStaticType[]) => {
             },
         },
     };
-    const filteredPeriods = periods.filter(el => el.cases !== 0 || el.deaths !== 0)
-filteredPeriods.reverse()
+    const filteredPeriods = periods.filter(el => el.cases > 0 || el.deaths > 0)
+
     filteredPeriods.unshift({
         cases: 0,
         deaths: 0,

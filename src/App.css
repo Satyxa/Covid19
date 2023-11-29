@@ -115,12 +115,17 @@ body {
 }
 .reset__graphicCountries {
   padding: 8px;
-  border: 1px solid #FF6666;
-  color: #FF6666;
+  border: 1px solid rgb(8,22,90);
+  color: rgb(8,22,90);
+  letter-spacing: 0.06em;
+  transition: 0.5s;
+  border-radius: 3px;
 }
 .reset__graphicCountries:hover {
-  border: 1px solid #6600CC;
-  color: #6600CC;
+  transition: 0.5s;
+  letter-spacing: 0.1em;
+  border: 1px solid Crimson;
+  color: Crimson;
 }
 input {
   border: 1px solid lightgray;
@@ -144,13 +149,14 @@ th {
   border: 1px solid #366;
   padding: 8px 12px;
   font-size: 13px;
+  letter-spacing: 0.02em;
 }
 th:hover {
   box-shadow: inset 0 -1px 45px rgb(254,255,178);
 }
 
 .th__active {
-  box-shadow: inset 0 -1px 45px rgb(254,255,178);
+  box-shadow: inset 0 0 45px rgb(254,255,178);
 }
 td {
 
@@ -207,18 +213,22 @@ button {
   margin: 20px 0;
 }
 .reset_filters {
-  border: 1px solid #FF6666;
-  color: #FF6666;
+  border: 1px solid rgb(34,108,95);
+  color: rgb(34,108,95);
   border-radius: 3px;
   float: right;
-  width: 170px;
+  width: 200px;
   height: 45px;
   text-align: center;
-  background-color: #ffffff;
+  background-color: transparent;
+  letter-spacing: 0.03em;
+  transition: 0.5s;
 }
 .reset_filters:hover {
-  border: 1px solid #6600CC;
-  color: #6600CC;
+  letter-spacing: 0.1em;
+  border: 1px solid Crimson;
+  color: Crimson;
+  transition: 0.5s;
 }
 
 select {
@@ -242,14 +252,14 @@ select {
   justify-content: space-around;
 }
 .pagination__button-even {
-  border: 1px solid #FF6666;
+  border: 1px solid rgb(34,108,95);
   border-radius: 50%;
-  color: #FF6666;
+  color: rgb(34,108,95);
 }
 .pagination__button-odd {
-  border: 1px solid #6600CC;
+  border: 1px solid rgb(8,22,90);
   border-radius: 50%;
-  color: #6600CC;
+  color: rgb(8,22,90);
 }
 .pagination__button {
   padding: 5px 10px;

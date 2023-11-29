@@ -24,7 +24,7 @@ export const Graphic = React.memo(({GeneralInfoByEvenCountry, graphicData, graph
                 </div>
 
                 <div className="reset__graphicCountries__container">
-                    <button className="reset__graphicCountries"
+                    <button className={graphicCountries.length ? "reset__graphicCountries" : 'none'}
                             onClick={() => setGraphicCountries([])}>Показать все страны</button>
                 </div>
             </div>

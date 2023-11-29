@@ -43,6 +43,7 @@ const covidTable = memo(function App() {
 
     const [graphicCountries, setGraphicCountries] = useState<any>([])
     const [country, setCountry] = useState('')
+    const [periods, setPeriods] = useState([])
 
     const [sortBy, setSortBy] = useState(COUNTRY)
 
@@ -59,16 +60,17 @@ const covidTable = memo(function App() {
     const [pageSize, setPageSize] = useState(3)
     const [localPageSize, setLocalPageSize] = useState<any>(3)
     const [pageSizeSubtitle, setPageSizeSubtitle] = useState(SET_PAGE_SIZE_SUBTITLE)
-    console.log(data)
 
     const GeneralInfoByEvenCountry = useMemo(
         () => dataCounter(data, startDate, endDate),
         [data, startDate, endDate])
-    console.log(GeneralInfoByEvenCountry)
+
     const GraphicData: monthStaticType[] = useMemo(
         () => dataCounterGraphic(GeneralInfoByEvenCountry, graphicCountries),
         [GeneralInfoByEvenCountry, graphicCountries])
+
     console.log(GraphicData)
+
     const filteredDataByCountry = useMemo(
         () => getFilteredDataByCountry(GeneralInfoByEvenCountry, country),
         [GeneralInfoByEvenCountry, country])

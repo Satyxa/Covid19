@@ -1,19 +1,6 @@
 import {covid19Data, GeneralInfoByEvenCountryType, monthStaticType, periodStatic} from "../types";
 import {getCountryName} from "../Utils/Getters";
 
-export type nnn = {
-    allCases: number
-    allCasesByPeriod: number
-    allDeaths: number
-    allDeathsByPeriod: number
-    country: string
-    averageCasesPerDay: number
-    averageDeathsPerDay: number
-    population?: number
-    days: number,
-    maxCasesPerDay: number
-    maxDeathsPerDay: number
-}
 
 export const dataCounter = (data: covid19Data[], startDate: Date, endDate: Date) => {
     const GeneralInfoByEvenCountry: GeneralInfoByEvenCountryType[] = []
@@ -29,90 +16,89 @@ export const dataCounter = (data: covid19Data[], startDate: Date, endDate: Date)
         if (!countryData) {
 
             if (dateOfInfo >= startDate && dateOfInfo <= endDate) {
-                allCasesByPeriod += el.cases
-                allDeathsByPeriod += el.deaths
+                GeneralInfoByEvenCountry.push({
+                    country: el.countriesAndTerritories,
+                    allCases: el.cases,
+                    allDeaths: el.deaths,
+                    allCasesByPeriod: allCasesByPeriod > 0 ? allCasesByPeriod : 0,
+                    allDeathsByPeriod: allDeathsByPeriod > 0 ? allDeathsByPeriod : 0,
+                    averageCasesPerDay: allCasesByPeriod > 0 ? allCasesByPeriod : 0,
+                    averageDeathsPerDay: allDeathsByPeriod > 0 ? allDeathsByPeriod : 0,
+                    population: el.popData2019,
+                    days: 1,
+                    maxCasesPerDay: el.cases,
+                    maxDeathsPerDay: el.deaths,
+                    infoByMonths: [
+                        {
+                            month: '12/2019',
+                            cases: endDate.getMonth() === 11 && endDate.getFullYear() === 2019 ? el.cases : 0,
+                            deaths: endDate.getMonth() === 11 && endDate.getFullYear() === 2019 ? el.deaths : 0
+                        },
+                        {
+                            month: '01/2020',
+                            cases: endDate.getMonth() === 0 ? el.cases : 0,
+                            deaths: endDate.getMonth() === 0 ? el.deaths : 0
+                        },
+                        {
+                            month: '02/2020',
+                            cases: endDate.getMonth() === 1 ? el.cases : 0,
+                            deaths: endDate.getMonth() === 1 ? el.deaths : 0
+                        },
+                        {
+                            month: '03/2020',
+                            cases: endDate.getMonth() === 2 ? el.cases : 0,
+                            deaths: endDate.getMonth() === 2 ? el.deaths : 0
+                        },
+                        {
+                            month: '04/2020',
+                            cases: endDate.getMonth() === 3 ? el.cases : 0,
+                            deaths: endDate.getMonth() === 3 ? el.deaths : 0
+                        },
+                        {
+                            month: '05/2020',
+                            cases: endDate.getMonth() === 4 ? el.cases : 0,
+                            deaths: endDate.getMonth() === 4 ? el.deaths : 0
+                        },
+                        {
+                            month: '06/2020',
+                            cases: endDate.getMonth() === 5 ? el.cases : 0,
+                            deaths: endDate.getMonth() === 5 ? el.deaths : 0
+                        },
+                        {
+                            month: '07/2020',
+                            cases: endDate.getMonth() === 6 ? el.cases : 0,
+                            deaths: endDate.getMonth() === 6 ? el.deaths : 0
+                        },
+                        {
+                            month: '08/2020',
+                            cases: endDate.getMonth() === 7 ? el.cases : 0,
+                            deaths: endDate.getMonth() === 7 ? el.deaths : 0
+                        },
+                        {
+                            month: '09/2020',
+                            cases: endDate.getMonth() === 8 ? el.cases : 0,
+                            deaths: endDate.getMonth() === 8 ? el.deaths : 0
+                        },
+                        {
+                            month: '10/2020',
+                            cases: endDate.getMonth() === 9 ? el.cases : 0,
+                            deaths: endDate.getMonth() === 9 ? el.deaths : 0
+                        },
+                        {
+                            month: '11/2020',
+                            cases: endDate.getMonth() === 10 ? el.cases : 0,
+                            deaths: endDate.getMonth() === 10 ? el.deaths : 0
+                        },
+                        {
+                            month: '12/2020',
+                            cases: endDate.getMonth() === 11 && endDate.getFullYear() === 2020 ? el.cases : 0,
+                            deaths: endDate.getMonth() === 11 && endDate.getFullYear() === 2020 ? el.deaths : 0,
+                        },
+                    ]
+                })
             }
 
-            GeneralInfoByEvenCountry.push({
-                country: el.countriesAndTerritories,
-                allCases: el.cases,
-                allDeaths: el.deaths,
-                allCasesByPeriod,
-                allDeathsByPeriod,
-                averageCasesPerDay: allCasesByPeriod,
-                averageDeathsPerDay: allDeathsByPeriod,
-                population: el.popData2019,
-                days: 1,
-                maxCasesPerDay: el.cases,
-                maxDeathsPerDay: el.deaths,
-                infoByMonths: [
-                    {
-                        month: '12/2019',
-                        cases: 0,
-                        deaths: 0
-                    },
-                    {
-                        month: '01/2020',
-                        cases: 0,
-                        deaths: 0
-                    },
-                    {
-                        month: '02/2020',
-                        cases: 0,
-                        deaths: 0
-                    },
-                    {
-                        month: '03/2020',
-                        cases: 0,
-                        deaths: 0
-                    },
-                    {
-                        month: '04/2020',
-                        cases: 0,
-                        deaths: 0
-                    },
-                    {
-                        month: '05/2020',
-                        cases: 0,
-                        deaths: 0
-                    },
-                    {
-                        month: '06/2020',
-                        cases: 0,
-                        deaths: 0
-                    },
-                    {
-                        month: '07/2020',
-                        cases: 0,
-                        deaths: 0
-                    },
-                    {
-                        month: '08/2020',
-                        cases: 0,
-                        deaths: 0
-                    },
-                    {
-                        month: '09/2020',
-                        cases: 0,
-                        deaths: 0
-                    },
-                    {
-                        month: '10/2020',
-                        cases: 0,
-                        deaths: 0
-                    },
-                    {
-                        month: '11/2020',
-                        cases: 0,
-                        deaths: 0
-                    },
-                    {
-                        month: '12/2020',
-                        cases: allCasesByPeriod,
-                        deaths: allDeathsByPeriod,
-                    },
-                ]
-            })
+
         } else {
             GeneralInfoByEvenCountry.find((data) => {
                 if (data.country === el.countriesAndTerritories) {
@@ -146,22 +132,88 @@ export const dataCounter = (data: covid19Data[], startDate: Date, endDate: Date)
 export const dataCounterGraphic = (GeneralInfoByEvenCountry: GeneralInfoByEvenCountryType[],
                                    graphicCountries: string[]) => {
 
-    let periods: monthStaticType[] = []
+    let periods: monthStaticType[] = [
+        {
+            month: '12/2019',
+            cases: 0,
+            deaths: 0
+        },
+        {
+            month: '01/2020',
+            cases: 0,
+            deaths: 0
+        },
+        {
+            month: '02/2020',
+            cases: 0,
+            deaths: 0
+        },
+        {
+            month: '03/2020',
+            cases: 0,
+            deaths: 0
+        },
+        {
+            month: '04/2020',
+            cases: 0,
+            deaths: 0
+        },
+        {
+            month: '05/2020',
+            cases: 0,
+            deaths: 0
+        },
+        {
+            month: '06/2020',
+            cases: 0,
+            deaths: 0
+        },
+        {
+            month: '07/2020',
+            cases: 0,
+            deaths: 0
+        },
+        {
+            month: '08/2020',
+            cases: 0,
+            deaths: 0
+        },
+        {
+            month: '09/2020',
+            cases: 0,
+            deaths: 0
+        },
+        {
+            month: '10/2020',
+            cases: 0,
+            deaths: 0
+        },
+        {
+            month: '11/2020',
+            cases: 0,
+            deaths: 0
+        },
+        {
+            month: '12/2020',
+            cases: 0,
+            deaths: 0,
+        },
+    ]
 
-     GeneralInfoByEvenCountry.map((country, index) => {
-        if(!graphicCountries.includes(country.country, 0) && graphicCountries.length) return
-        if(!periods.length) country.infoByMonths.map(def => periods.push(def))
-        else {
-            country.infoByMonths.forEach(prop => {
-                periods.find(value => {
-                    if(prop.month === value.month){
-                        value.cases += prop.cases
-                        value.deaths += prop.deaths
-                    }
-                })
-            })
-        }
-    })
+     GeneralInfoByEvenCountry.map((country) => {
+         if (!graphicCountries.includes(country.country, 0) && graphicCountries.length) return
+
+         country.infoByMonths.forEach(prop => {
+
+             periods.find(value => {
+                 if (prop.month === value.month) {
+                     value.cases += prop.cases
+                     value.deaths += prop.deaths
+                 }
+             })
+         })
+
+     })
 
     return periods
 }
