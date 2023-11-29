@@ -27,7 +27,7 @@ import {
 } from "../Utils/Constants";
 import {getCasesBy1000People, getDeathsBy1000People} from "../Utils/Getters";
 
-export default React.memo(({dataWithPopulation, currentPage,
+export default React.memo(({filteredDataByQuantity, currentPage,
 pageSize, setTableFilter, tableFilter}: TableProps) => {
     return <div>
         <thead>
@@ -112,7 +112,7 @@ pageSize, setTableFilter, tableFilter}: TableProps) => {
         </tr>
         </thead>
         <tbody>
-        {dataWithPopulation.map((el: GeneralInfoByEvenCountryType, i: number) => {
+        {filteredDataByQuantity.map((el: GeneralInfoByEvenCountryType, i: number) => {
 
                 const casesBy1000People = Number(getCasesBy1000People(el)).toFixed(3)
                 const deathsBy1000People = Number(getDeathsBy1000People(el)).toFixed(3)
@@ -125,7 +125,7 @@ pageSize, setTableFilter, tableFilter}: TableProps) => {
                     el.maxCasesPerDay, el.maxDeathsPerDay]
 
                 if (i < viewsElements && i >= (viewsElements - pageSize)){
-                    return (<tr>{dataArray.map(prop => <td height='80px' className={i % 2 === 0 ? 'td_blue_color' : 'td_light-blue'}>{prop}</td>)}</tr>)}
+                    return (<tr key={i}>{dataArray.map((prop, i) => <td key={i} height='80px' className={i % 2 === 0 ? 'td_blue_color' : 'td_light-blue'}>{prop}</td>)}</tr>)}
             })}
         </tbody>
     </div>

@@ -13,7 +13,7 @@ import {
 import { Line } from 'react-chartjs-2';
 import { faker } from '@faker-js/faker';
 import moment from "moment";
-import {periodStatic} from "../types";
+import {monthStaticType, periodStatic} from "../types";
 
 ChartJS.register(
     CategoryScale,
@@ -26,7 +26,7 @@ ChartJS.register(
     Legend
 );
 
-export const drawGraphic = (periods: periodStatic[]) => {
+export const drawGraphic = (periods: monthStaticType[]) => {
     const options = {
         responsive: true,
         plugins: {
@@ -44,10 +44,10 @@ filteredPeriods.reverse()
     filteredPeriods.unshift({
         cases: 0,
         deaths: 0,
-        startDate: '00/00/00'
+        month: '00/00/00'
     })
 
-    const labels = filteredPeriods.map(per => per.startDate)
+    const labels = filteredPeriods.map(per => per.month)
     const data = {
         labels,
         datasets: [
@@ -71,7 +71,7 @@ filteredPeriods.reverse()
     return {options, data}
 }
 interface AreaChartProps {
-    periods: periodStatic[]
+    periods: monthStaticType[]
 }
 export const AreaChart: FC<AreaChartProps> = ({periods}:AreaChartProps) => {
     const {options, data} = drawGraphic(periods.reverse())

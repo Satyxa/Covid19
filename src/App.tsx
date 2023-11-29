@@ -2,15 +2,15 @@ import * as React from 'react'
 import './App.css'
 import "react-datepicker/dist/react-datepicker.css";
 import {memo, useEffect, useMemo, useState} from "react";
-import {GeneralInfoByEvenCountryType, periodStatic} from "./types";
+import {monthStaticType} from "./types";
 import {Pagination} from "./Components/Pagination";
 import {FilterByCountry} from "./Components/FilterByCountry";
 import {FilterByField} from "./Components/FilterByField";
 import {FilterByQuantity} from "./Components/FilterByQuantity";
 import {ResetButton} from "./Components/ResetButton";
 import Table from "./Components/Table";
-import {addPopulationToData, dataCounter, dataCounterGraphic} from "./BusinessLogicLayer/DataCounter";
-import {getCountriesInfo, getCovidStatic} from "./DataAccessLayer/getData";
+import {dataCounter, dataCounterGraphic} from "./BusinessLogicLayer/DataCounter";
+import {getCovidStatic} from "./DataAccessLayer/getData";
 import {
     COUNTRY,
     COUNTRY_ASC,
@@ -28,21 +28,12 @@ import {getFilteredDataByCountry} from "./Utils/Getters";
 import noData from '../src/assets/no_data.svg'
 
 const covidTable = memo(function App() {
-    const [countriesPopulationData, setCountriesPopulationData] = useState([])
     const [data, setData] = useState<any[]>([])
 
     useEffect(() => {
         const getInfo = async () => {
             const covidData = await getCovidStatic()
-            const countriesInfo = await getCountriesInfo()
             setData(covidData)
-            const nameAndPopulation = countriesInfo.map((el: any) => {
-                return {
-                    name: el.name.common,
-                    population: el.population
-                }
-            })
-            setCountriesPopulationData(nameAndPopulation)
         }
         getInfo()
     }, [])
@@ -68,16 +59,16 @@ const covidTable = memo(function App() {
     const [pageSize, setPageSize] = useState(3)
     const [localPageSize, setLocalPageSize] = useState<any>(3)
     const [pageSizeSubtitle, setPageSizeSubtitle] = useState(SET_PAGE_SIZE_SUBTITLE)
-
+    console.log(data)
 
     const GeneralInfoByEvenCountry = useMemo(
         () => dataCounter(data, startDate, endDate),
         [data, startDate, endDate])
-
-    const GraphicData: periodStatic[] = useMemo(
-        () => dataCounterGraphic(data, graphicCountries, startDate, endDate),
-        [data, graphicCountries, startDate, endDate])
-
+    console.log(GeneralInfoByEvenCountry)
+    const GraphicData: monthStaticType[] = useMemo(
+        () => dataCounterGraphic(GeneralInfoByEvenCountry, graphicCountries),
+        [GeneralInfoByEvenCountry, graphicCountries])
+    console.log(GraphicData)
     const filteredDataByCountry = useMemo(
         () => getFilteredDataByCountry(GeneralInfoByEvenCountry, country),
         [GeneralInfoByEvenCountry, country])
@@ -86,12 +77,10 @@ const covidTable = memo(function App() {
         () => getFilteredByQuantity(filteredDataByCountry, sortBy, valueFrom, valueTo),
         [filteredDataByCountry, sortBy, valueFrom, valueTo])
 
-    const dataWithPopulation: GeneralInfoByEvenCountryType[] = useMemo(
-        () => addPopulationToData(filteredDataByQuantity, countriesPopulationData),
-        [filteredDataByQuantity, countriesPopulationData])
+    useMemo(() => filterTable(tableFilter, filteredDataByQuantity),
+        [tableFilter, filteredDataByQuantity])
 
-    useMemo(() => filterTable(tableFilter, dataWithPopulation),
-        [tableFilter, dataWithPopulation])
+    useMemo(() => setCurrentPage(1), [pageSize, filteredDataByQuantity])
     return <div>
         <div className="content">
             <ChooseDate setStartDate={setStartDate}
@@ -113,8 +102,7 @@ const covidTable = memo(function App() {
 
                                 <FilterByCountry
                                     country={country}
-                                    setCountry={setCountry}
-                                    setCurrentPage={setCurrentPage}/>
+                                    setCountry={setCountry}/>
 
                                 <FilterByField
                                     setSortBy={setSortBy}
@@ -144,16 +132,16 @@ const covidTable = memo(function App() {
                                 setLocalValueFrom={setLocalValueFrom}
                                 setLocalValueTo={setLocalValueTo}/>
                         </div>
-                        {dataWithPopulation.length ?
+                        {filteredDataByQuantity.length ?
                             <div className="table-body">
-                                <Table dataWithPopulation={dataWithPopulation}
+                                <Table filteredDataByQuantity={filteredDataByQuantity}
                                        currentPage={currentPage}
                                        pageSize={pageSize}
                                        setTableFilter={setTableFilter}
                                        tableFilter={tableFilter}/>
 
                                 <div className="pagination-box">
-                                    <Pagination dataWithPopulation={dataWithPopulation}
+                                    <Pagination dataWithPopulation={filteredDataByQuantity}
                                                 setCurrentPage={setCurrentPage}
                                                 pageSize={pageSize}
                                                 currentPage={currentPage}/>

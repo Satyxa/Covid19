@@ -15,6 +15,13 @@ export type covid19Data = {
     // @ts-ignore
     Cumulative: string
 }
+
+export type monthStaticType = {
+    cases: number
+    deaths: number
+    month: string
+}
+
 export type GeneralInfoByEvenCountryType = {
     allCases: number
     allCasesByPeriod: number
@@ -23,11 +30,13 @@ export type GeneralInfoByEvenCountryType = {
     country: string
     averageCasesPerDay: number
     averageDeathsPerDay: number
-    population?: number
+    population: number
     days: number,
     maxCasesPerDay: number
     maxDeathsPerDay: number
+    infoByMonths: monthStaticType[]
 }
+
 
 export type periodStatic = {
     cases: number
@@ -57,7 +66,6 @@ export type ChooseDateProps = {
 export type FilterByCountryProps = {
     country: string
     setCountry: Dispatch<SetStateAction<string>>
-    setCurrentPage: Dispatch<SetStateAction<number>>
 }
 
 export type FilterByFieldProps = {
@@ -78,7 +86,7 @@ export type FilterByQuantityProps = {
 }
 
 export type GraphicProps = {
-    graphicData: periodStatic[],
+    graphicData: monthStaticType[],
     graphicCountries: string[],
     setGraphicCountries: Dispatch<SetStateAction<any[]>>
     GeneralInfoByEvenCountry: GeneralInfoByEvenCountryType[]
@@ -100,7 +108,7 @@ export type PaginationButtonsProps = {
 }
 
 export type TableProps = {
-    dataWithPopulation: GeneralInfoByEvenCountryType[]
+    filteredDataByQuantity: GeneralInfoByEvenCountryType[]
     currentPage: number
     pageSize: number
     setTableFilter: Dispatch<SetStateAction<string>>
